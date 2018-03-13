@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite parallel="tests" name="Failed suite [UI]" guice-stage="DEVELOPMENT" verbose="0">
+  <parameter name="implicitWaitInSeconds" value="30"/>
+  <parameter name="myParam" value="This is the value for a parameter"/>
+  <parameter name="browserName" value="chrome"/>
+  <parameter name="local" value="yes"/>
+  <listeners>
+    <listener class-name="utils.ListenerTest"/>
+  </listeners>
+  <test parallel="tests" name="EditIssueTest(failed)">
+    <groups>
+      <run>
+        <include name="UI"/>
+        <exclude name="SKIP"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="ui.EditIssueTest">
+        <methods>
+          <include name="addComment"/>
+          <include name="setUp"/>
+          <include name="checkButtonWork"/>
+        </methods>
+      </class> <!-- ui.EditIssueTest -->
+    </classes>
+  </test> <!-- EditIssueTest(failed) -->
+</suite> <!-- Failed suite [UI] -->

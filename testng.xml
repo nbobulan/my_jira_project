@@ -1,0 +1,40 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Sample test suite">
+
+    <listeners>
+        <listener class-name="utils.ListenerTest"/>
+    </listeners>
+
+    <parameter name="myParam" value="This is the value for a parameter"/>
+    <parameter name="browserName" value="chrome"/>
+    <parameter name="local" value="no"/>
+    <parameter name="implicitWaitInSeconds" value="15"/>
+
+    <test name="UI Tests">
+        <!--Comment this section for "groups" to work (delete "-" in the end of this line and in the beginning of last line) -->
+        <method-selectors>
+            <method-selector>
+                <script language="beanshell"><![CDATA[
+                    runFlag = groups.containsKey("SMOKE"); // always run tests with "SMOKE" group
+                    if (groups.containsKey("UI") && testngMethod.isBeforeGroupsConfiguration()) runFlag = true; //run UI @beforeGroups
+                    System.out.println("run '" + testngMethod.getRealClass().getName() + "." + testngMethod.getMethodName() + "'? -> " + runFlag);
+                    return runFlag;
+                ]]></script>
+            </method-selector>
+        </method-selectors>
+        <!-- End of section, DO NOT DELETE -->
+        <groups>
+            <run>
+                <include name="UI"/>
+                <exclude name="SKIP"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="ui.EditIssueTest"/>
+            <class name="ui.CreateIssueTest"/>
+            <class name="ui.SearchIssueTest"/>
+            <class name="ui.RefactoredIssueTest"/>
+        </classes>
+    </test>
+
+</suite>
